@@ -14,14 +14,14 @@ export default function Drinks() {
   const recipes = useSelector((state) => state.reducer.recipes) || [];
 
   const fetchSerchCategoryDrinks = async (cat) => {
-    try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${cat}`);
-      const data = await response.json();
-      setDrinks(data.drinks);
-      console.log(cat);
-    } catch (error) {
-      console.log('erro no fetchSerchCategoryDrinks');
-    }
+    // try {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${cat}`);
+    const data = await response.json();
+    setDrinks(data.drinks);
+    // console.log(cat);
+    // } catch (error) {
+    //   console.log('erro no fetchSerchCategoryDrinks');
+    // }
   };
 
   const changeDrinks = (result) => setDrinks(result);
