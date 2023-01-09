@@ -20,13 +20,13 @@ describe('teste o componente <App.js />', () => {
     );
     const { location: { pathname } } = history;
     expect(pathname).toBe('/');
-    urls.forEach((url, index) => {
-      console.log(index, url);
+    urls.forEach((url) => {
+      // console.log(index, url)
       act(() => {
         history.push(url);
       });
       const { location: { pathname: pat } } = history;
-      console.log('pat', pat);
+      // console.log('pat', pat);
       expect(pat).toBe(url);
     });
   });

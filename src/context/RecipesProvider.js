@@ -13,7 +13,7 @@ export default function RecipesProvider({ children }) {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
       setMeals(data.meals);
-      console.log(data.meals);
+      // console.log(data.meals);
     } catch (error) {
       console.log('erro no fetchMeals');
     }
@@ -34,6 +34,7 @@ export default function RecipesProvider({ children }) {
     try {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
       const data = await response.json();
+      // console.log('aqui', data);
       setCategoryMeals(data.meals);
       // console.log(data.meals);
     } catch (error) {

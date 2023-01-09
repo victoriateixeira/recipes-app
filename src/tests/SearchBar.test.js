@@ -34,12 +34,12 @@ describe('Testes para o SearchBar', () => {
       Promise.resolve({
         status: 200,
         json: () => {
-          console.log(url);
+          // console.log(url);
           switch (url) {
           case mealsURL:
             return Promise.resolve(meals);
           case 'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken':
-            console.log('entrou');
+            // console.log('entrou');
             return Promise.resolve(chickenIngredient);
           case drinksURL:
             return Promise.resolve(drinks);
@@ -122,12 +122,12 @@ describe('Outros mock acontecendo', () => {
       Promise.resolve({
         status: 200,
         json: () => {
-          console.log(url);
+          // console.log(url);
           switch (url) {
           case mealsURL:
             return Promise.resolve(meals);
           case 'https://www.themealdb.com/api/json/v1/1/search.php?s=chicken handi':
-            console.log('entrou');
+            // console.log('entrou');
             return Promise.resolve(chickenHandiName);
           case drinksURL:
             return Promise.resolve(drinks);
@@ -170,12 +170,12 @@ describe('Outros mock acontecendo', () => {
         Promise.resolve({
           status: 200,
           json: () => {
-            console.log(url);
+            // console.log(url);
             switch (url) {
             case mealsURL:
               return Promise.resolve(meals);
             case 'https://www.themealdb.com/api/json/v1/1/search.php?f=y':
-              console.log('entrou');
+              // console.log('entrou');
               return Promise.resolve(letterY);
             case drinksURL:
               return Promise.resolve(drinks);
