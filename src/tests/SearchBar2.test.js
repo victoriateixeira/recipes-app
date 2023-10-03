@@ -77,7 +77,7 @@ describe('Testes para o SearchBar', () => {
           <Meals />
         </RecipesProvider>
       ), myStore,
-      '/meals',
+      '/drinks',
     );
     const firstImg = await screen.findByRole('img', {
       name: /corba/i,
@@ -145,7 +145,7 @@ describe('Outros mock acontecendo', () => {
           <Meals />
         </RecipesProvider>
       ), myStore,
-      '/meals',
+      '/drinks',
     );
     const searchIcon = screen.getByTestId(searchBtnId);
     userEvent.click(searchIcon);

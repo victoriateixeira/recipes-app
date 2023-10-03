@@ -14,15 +14,9 @@ export default function Meals() {
   const recipes = useSelector((state) => state.reducer.recipes) || [];
 
   const fetchSerchCategoryMeals = async (cat) => {
-    try {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`);
-      const data = await response.json();
-      console.log(data);
-      setMeals(data.meals);
-      // console.log(cat);
-    } catch (error) {
-      console.log('erro no fetchSerchCategoryDrinks');
-    }
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`);
+    const data = await response.json();
+    setMeals(data.meals);
   };
 
   const changeMeals = (result) => setMeals(result);
@@ -31,7 +25,6 @@ export default function Meals() {
     setSearchBarOn((prevState) => !prevState);
   };
 
-  // console.log(meals);
   return (
     <>
       <Header title="Meals" isSearchOn toggleSearchBar={ toggleSearchBar } />

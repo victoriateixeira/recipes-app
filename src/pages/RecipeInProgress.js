@@ -1,5 +1,5 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import requestApi from '../services/requestApi';
 import '../App.css';
 import BtnShare from '../components/BtnShare';
@@ -20,7 +20,7 @@ function RecipeInProgress() {
 
   const mealsEndpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`;
   const drinksEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`;
-  const arrayFavorite = valuesfavoriteRecipes(reciveData, isDrink) || [];
+  const arrayFavorite = valuesfavoriteRecipes(reciveData, isDrink);
   const current = getLocalStore('favoriteRecipes') || [];
   const boolfavorite = current.some(({ id: idSelect }) => params.id === idSelect);
 
@@ -43,32 +43,17 @@ function RecipeInProgress() {
     localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
   }
 
-  const handleFetch = async () => {
+  const handleFetch = useCallback(async () => {
     if (history.location.pathname.includes('meals')) {
       setLoading(true);
       const data = await (requestApi(mealsEndpoint));
       setReciveData(data.meals[0]);
-    } if (isDrink) {
+    } else if (isDrink) {
       const data = await (requestApi(drinksEndpoint));
       setReciveData(data.drinks[0]);
     }
     setLoading(false);
-  };
-  // const handleLocalStorage = () => {
-  //   const inProgressRecipes = JSON.parse(localStorage
-  //     .getItem('inProgressRecipes') || '{ "meals": {}, "drinks": {} }');
-  //   const isProgress = [inProgressRecipes].some((recipe) => (
-  //     +Object.keys(recipe[key]) === +params.id));
-  //   const obj = {
-  //     ...inProgressRecipes,
-  //     [key]: { ...inProgressRecipes[key],
-  //       [params.id]: [...ingredients],
-  //     },
-  //   };
-  //   if (!isProgress) {
-  //     localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
-  //   }
-  // };
+  }, [mealsEndpoint, drinksEndpoint, history.location.pathname, isDrink]);
 
   useEffect(() => {
     const recoveryLocalStorage = JSON.parse(
@@ -76,7 +61,7 @@ function RecipeInProgress() {
     );
     setIsChecked(recoveryLocalStorage);
     handleFetch();
-  }, []);
+  }, [handleFetch]);
 
   if (loading) { return <span>carregando...</span>; }
 
