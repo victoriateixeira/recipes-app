@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import RecipesContext from '../context/RecipesContext';
@@ -14,9 +13,14 @@ export default function Meals() {
   const recipes = useSelector((state) => state.reducer.recipes) || [];
 
   const fetchSerchCategoryMeals = async (cat) => {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`);
-    const data = await response.json();
-    setMeals(data.meals);
+    try {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`);
+      const data = await response.json();
+      setMeals(data.meals);
+      console.log(cat);
+    } catch (error) {
+      console.log('erro no fetchSerchCategoryDrinks');
+    }
   };
 
   const changeMeals = (result) => setMeals(result);
@@ -25,7 +29,6 @@ export default function Meals() {
     setSearchBarOn((prevState) => !prevState);
   };
 
-  // console.log(meals);
   return (
     <>
       <Header title="Meals" isSearchOn toggleSearchBar={ toggleSearchBar } />
@@ -86,7 +89,6 @@ export default function Meals() {
           </div>
         ))}
       </div>
-      <Footer />
     </>
   );
 }
