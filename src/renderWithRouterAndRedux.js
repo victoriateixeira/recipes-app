@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers';
+import AppProvider from './context/AppProvider';
+import RecipesProvider from './context/RecipesProvider';
 
 const renderWithRouterAndRedux = (component, initialState, route = '/') => {
   const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
@@ -14,9 +16,13 @@ const renderWithRouterAndRedux = (component, initialState, route = '/') => {
   return {
     ...render(
       <Provider store={ store }>
-        <Router history={ history }>
-          {component}
-        </Router>
+        <AppProvider>
+          <RecipesProvider>
+            <Router history={ history }>
+              {component}
+            </Router>
+          </RecipesProvider>
+        </AppProvider>
       </Provider>,
     ),
     history,
