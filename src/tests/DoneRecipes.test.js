@@ -63,7 +63,7 @@ describe('testes da página de receitas feitas', () => {
   setLocalStorage('doneRecipes', recipes);
   JSON.parse(localStorage.getItem('doneRecipes'));
   test('testa se a página renderiza os botões de filtro', () => {
-    renderWithRouterq(<DoneRecipes />);
+    renderWithRouter(<DoneRecipes />);
     const allButton = screen.getByRole('button', { name: 'All' });
     const mealsButton = screen.getByRole('button', { name: 'Meals' });
     const drinksButton = screen.getByRole('button', { name: 'Drinks' });
