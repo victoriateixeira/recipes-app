@@ -55,7 +55,7 @@ export default function Login() {
           />
         </label>
         <label htmlFor="password-input">
-          Passoword:
+          Password:
           <input
             type="password"
             id="password-input"
